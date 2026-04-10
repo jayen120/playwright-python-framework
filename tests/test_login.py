@@ -1,34 +1,32 @@
 from playwright.sync_api import Page
+from pages.login_page import LoginPage
 
+# def test_login_valid(page: Page):
+def test_login_valid(page):
+    login_page = LoginPage(page)
+    login_page.open()
+    
+    login_page.login("standard_user", "secret_sauce")
 
-def test_login_valid(page: Page):
-    page.goto("https://www.saucedemo.com/")
-
-    page.fill("#user-name", "standard_user")
-    # page.locator('[data-test="username"]').fill("standard_user")
-    page.fill("#password", "secret_sauce")
-    page.click("#login-button")
-
-    #Assertion (important)
     assert "inventory" in page.url
 
-def test_login_invalid(page: Page):
-    page.goto("https://www.saucedemo.com/")
+def test_login_invalid(page):
+    login_page = LoginPage(page)
+    login_page.open()
 
-    page.fill("#user-name", "locked_out_user")
-    page.fill("#password", "secret_sauce")
-    page.click("#login-button")
-
-    error = page.locator('[data-test="error"]').inner_text()
-
+    login_page.login("locked_out_user", "secret_sauce")
+    
+    error = login_page.get_error_message()
+    
     assert "locked out" in error.lower()
 
-def test_login_empty(page: Page):
-    page.goto("https://www.saucedemo.com/")
+def test_login_empty(page):
+    login_page = LoginPage(page)
+    login_page.open()
+    
+    login_page.login("", "")
+    error = login_page.get_error_message()
 
-    page.click("#login-button")
-    
-    error = page.locator('[data-test="error"]').inner_text()
-    
+
     assert "required" in error.lower()
 
