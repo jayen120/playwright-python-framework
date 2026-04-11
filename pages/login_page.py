@@ -19,4 +19,8 @@ class LoginPage:
 
     def get_error_message(self):
         return self.page.locator(self.error_message).inner_text()
+    
+    def is_inventory_page_visible(self):
+        self.page.wait_for_selector(".inventory_list")
+        return self.page.locator(".inventory_list").is_visible()
         

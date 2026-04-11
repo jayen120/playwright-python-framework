@@ -8,7 +8,7 @@ def test_login_valid(page):
     
     login_page.login("standard_user", "secret_sauce")
 
-    assert "inventory" in page.url
+    assert login_page.is_inventory_page_visible()
 
 def test_login_invalid(page):
     login_page = LoginPage(page)
@@ -18,7 +18,7 @@ def test_login_invalid(page):
     
     error = login_page.get_error_message()
     
-    assert "locked out" in error.lower()
+    assert "Sorry, this user has been locked out." in error
 
 def test_login_empty(page):
     login_page = LoginPage(page)
