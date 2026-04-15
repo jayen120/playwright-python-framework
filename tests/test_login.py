@@ -1,30 +1,25 @@
+import pytest
 from pages.login_page import LoginPage
-from utils.config import USERNAME, PASSWORD, BASE_URL
+from utils.config import BASE_URL
+from tests.test_data import valid_users, empty_users, invalid_users
 
-# def test_login_valid(page: Page):
-def test_login_valid(page):
-    login_page = LoginPage(page)
-    
-    login_page.open(BASE_URL)
-    login_page.login(USERNAME, PASSWORD)
 
+@pytest.mark.parametrize("username,password", valid_users)
+def test_login_valid(login_page, username, password):
+    login_page.login(username, password)
     assert login_page.is_inventory_page_visible()
 
-def test_login_invalid(page):
-    login_page = LoginPage(page)
-    
-    login_page.open(BASE_URL)
-    login_page.login("locked_out_user", PASSWORD)
-    
-    error = login_page.get_error()
-    assert "locked out" in error.lower()
 
-def test_login_empty(page):
-    login_page = LoginPage(page)
-    
-    login_page.open(BASE_URL)
-    login_page.login("", "")
-    
+@pytest.mark.parametrize("username,password,expected_error", invalid_users)
+def test_login_invalid(login_page, username, password, expected_error):
+    login_page.login(username, password)
     error = login_page.get_error()
-    assert "username is required" in error.lower()
+    assert expected_error in error.lower()
+
+
+@pytest.mark.parametrize("username,password", empty_users)
+def test_login_empty(login_page, username, password):
+    login_page.login(username, password)
+    error = login_page.get_error()
+    assert "required" in error.lower()
 
