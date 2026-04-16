@@ -4,12 +4,14 @@ from utils.config import BASE_URL
 from tests.test_data import valid_users, empty_users, invalid_users
 
 
+@pytest.mark.smoke
 @pytest.mark.parametrize("username,password", valid_users)
 def test_login_valid(login_page, username, password):
     login_page.login(username, password)
     assert login_page.is_inventory_page_visible()
 
 
+@pytest.mark.regression
 @pytest.mark.parametrize("username,password,expected_error", invalid_users)
 def test_login_invalid(login_page, username, password, expected_error):
     login_page.login(username, password)
@@ -17,6 +19,7 @@ def test_login_invalid(login_page, username, password, expected_error):
     assert expected_error in error.lower()
 
 
+@pytest.mark.regression
 @pytest.mark.parametrize("username,password", empty_users)
 def test_login_empty(login_page, username, password):
     login_page.login(username, password)
