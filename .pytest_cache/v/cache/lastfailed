@@ -1,0 +1,7 @@
+{
+  "tests/test_login.py::test_login_valid": true,
+  "tests/test_login.py::test_login_invalid": true,
+  "tests/test_login.py::test_login_empty": true,
+  "tests/test_login.py::test_login_invalid[chromium-invalid_user-wrong_password]": true,
+  "tests/test_login.py::test_login_invalid[chromium-locked_out_user-secret_sauce]": true
+}

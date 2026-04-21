@@ -1,0 +1,18 @@
+[
+  "tests/test_login.py::test_bruteforce_attempt[chromium]",
+  "tests/test_login.py::test_login_empty",
+  "tests/test_login.py::test_login_empty[chromium--]",
+  "tests/test_login.py::test_login_empty[chromium]",
+  "tests/test_login.py::test_login_invalid",
+  "tests/test_login.py::test_login_invalid[chromium-invalid_user-wrong_password-do not match]",
+  "tests/test_login.py::test_login_invalid[chromium-invalid_user-wrong_password]",
+  "tests/test_login.py::test_login_invalid[chromium-locked_out_user-secret_sauce-locked out]",
+  "tests/test_login.py::test_login_invalid[chromium-locked_out_user-secret_sauce]",
+  "tests/test_login.py::test_login_invalid[chromium]",
+  "tests/test_login.py::test_login_valid",
+  "tests/test_login.py::test_login_valid[chromium-standard_user-secret_sauce]",
+  "tests/test_login.py::test_login_valid[chromium]",
+  "tests/test_login.py::test_sql_injection[chromium-' OR 1=1 ---anything-error]",
+  "tests/test_login.py::test_sql_injection[chromium-admin' ---anything-error]",
+  "tests/test_login.py::test_sql_injection[chromium-standard_user-' OR '1'='1-error]"
+]

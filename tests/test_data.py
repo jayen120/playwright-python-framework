@@ -10,3 +10,9 @@ invalid_users = [
 empty_users = [
     ("", ""),
 ]
+
+security_test_data = [
+    ("' OR 1=1 --", "anything", "error"),
+    ("admin' --", "anything", "error"), 
+    ("standard_user", "' OR '1'='1", "error"),
+]
